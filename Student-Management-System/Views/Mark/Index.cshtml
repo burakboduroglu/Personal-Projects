@@ -1,0 +1,47 @@
+﻿@using StudentManagementSystem.Models.EntityFramework
+@model List<MARKS>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th style="text-align:center" bgcolor="LightBlue">MARK ID</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT NAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT SURNAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">LECTURE NAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">EXAM 1</th>
+        <th style="text-align:center" bgcolor="LightBlue">EXAM 2</th>
+        <th style="text-align:center" bgcolor="LightBlue">EXAM 3</th>
+        <th style="text-align:center" bgcolor="LightBlue">PROJECT</th>
+        <th style="text-align:center" bgcolor="LightBlue">AVERAGE</th>
+        <th style="text-align:center" bgcolor="LightBlue">SITUATION</th>
+        <th style="text-align:center" bgcolor="LightBlue">OPERATIONS</th>
+    </tr>
+    <tbody>
+        @foreach (var mark in Model)
+        {
+            <tr>
+                <td style="text-align:center" bgcolor="white">@mark.MARKID</td>
+                <td style="text-align:center" bgcolor="white">@mark.STUDENTS.STDNAME</td>
+                <td style="text-align:center" bgcolor="white">@mark.STUDENTS.STDSURNAME</td>
+                <td style="text-align:center" bgcolor="white">@mark.LECTURES.LECTURENAME</td>
+                <td style="text-align:center" bgcolor="white">@mark.EXAM1</td>
+                <td style="text-align:center" bgcolor="white">@mark.EXAM2</td>
+                <td style="text-align:center" bgcolor="white">@mark.EXAM3</td>
+                <td style="text-align:center" bgcolor="white">@mark.PROJECT</td>
+                <td style="text-align:center" bgcolor="white">@mark.AVERAGE</td>
+                <td style="text-align:center" bgcolor="white">@mark.SITUATION</td>
+                <td style="text-align:center" bgcolor="white">
+                    <a href="/Mark/Update/@mark.MARKID" class="btn btn-warning">Update</a>
+                    <a href="/Mark/Delete/@mark.MARKID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<a href="/Mark/NewMark" class="btn btn-primary">Add a New Mark</a>
+
+

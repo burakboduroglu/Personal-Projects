@@ -1,0 +1,30 @@
+﻿@using StudentManagementSystem.Models.EntityFramework
+@model List<LECTURES>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="table table-bordered">
+    <tr>
+        <th style="text-align:center" bgcolor="LightBlue">LECTURE ID</th>
+        <th style="text-align:center" bgcolor="LightBlue">LECTURE NAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">OPERATIONS</th>
+    </tr>
+    <tbody>
+        @foreach (var lecture in Model)
+        {
+        <tr>
+            <td style="text-align:center" bgcolor="white">@lecture.LECTUREID</td>
+            <td style="text-align:center" bgcolor="white">@lecture.LECTURENAME</td>
+            <td style="text-align:center" bgcolor="white">
+                <a href="/Lecture/Delete/@lecture.LECTUREID" class="btn btn-danger">Delete</a>
+                <a href="/Lecture/Update/@lecture.LECTUREID" class="btn btn-warning">Update</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="/Lecture/AddNewLecture" class="btn btn-primary">Add New Lecture</a>
+

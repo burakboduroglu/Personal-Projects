@@ -1,0 +1,17 @@
+﻿@model StudentManagementSystem.Models.EntityFramework.LECTURES
+@{
+    ViewBag.Title = "Update";
+}
+
+@using (Html.BeginForm("LectureUpdate", "Lecture", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m=>m.LECTURENAME, new { @class = "text-warning" })
+        @Html.TextBoxFor(m=>m.LECTURENAME, new { @class="form-control"})
+    </div>
+    @Html.HiddenFor(m=>m.LECTUREID)
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Update</button>
+    </div>
+}
+

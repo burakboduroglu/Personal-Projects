@@ -1,0 +1,61 @@
+﻿@model StudentManagementSystem.Models.EntityFramework.MARKS
+@{
+    ViewBag.Title = "Update";
+}
+
+@using (Html.BeginForm("Update", "Mark", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.STDID, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.STDID, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.LECTUREID, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.LECTUREID, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EXAM1, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.EXAM1, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EXAM2, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.EXAM2, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EXAM3, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.EXAM3, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.PROJECT, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.PROJECT, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.AVERAGE, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.AVERAGE, new {@Value = ViewBag.avg, @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.SITUATION, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.SITUATION, new { @Value = @ViewBag.sit, @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.MARKID)
+    <div style="margin-top:15px">
+        <button type="submit" name="operation" value="Calculate" class="btn btn-success">
+            Calculate
+        </button>
+    </div>
+
+    <div style="margin-top:15px">
+        <button type="submit" name="operation" value="Update" class="btn btn-warning">
+            Update
+        </button>
+    </div>
+}
+

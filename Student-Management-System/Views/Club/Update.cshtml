@@ -1,0 +1,16 @@
+﻿@model StudentManagementSystem.Models.EntityFramework.CLUBS
+@{
+    ViewBag.Title = "Update";
+}
+
+@using (Html.BeginForm("ClubUpdate", "Club", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.CLUBNAME, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.CLUBNAME, new { @class="form-control" })
+    </div>
+    @Html.HiddenFor(m => m.CLUBID)
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Update</button>
+    </div>
+}

@@ -1,0 +1,34 @@
+﻿@model StudentManagementSystem.Models.EntityFramework.STUDENTS
+@{
+    ViewBag.Title = "Update";
+}
+
+@using (Html.BeginForm("StudentUpdate", "Student", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.STDNAME, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.STDNAME, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.STDSURNAME, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.STDSURNAME, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.STDGENDER, new { @class = "text-warning" })
+        @Html.TextBoxFor(m => m.STDGENDER, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.STDCLUB, new { @class = "text-warning" })
+        @Html.DropDownListFor(m => m.CLUBS.CLUBID, (List<SelectListItem>)ViewBag.clb, new { @class = "form-control" })
+        @*@Html.TextBoxFor(m => m.STDCLUB, new { @class = "form-control" })*@
+    </div>
+
+    @Html.HiddenFor(m => m.STDID)
+    <div style="margin-top:15px">
+        <button class="btn btn-success">Update</button>
+    </div>
+}
+

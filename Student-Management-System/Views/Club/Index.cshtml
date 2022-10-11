@@ -1,0 +1,30 @@
+﻿
+@using StudentManagementSystem.Models.EntityFramework
+@model List<CLUBS>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th style="text-align:center" bgcolor="LightBlue">CLUB ID</th>
+        <th style="text-align:center" bgcolor="LightBlue">CLUB NAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">OPERATIONS</th>
+    </tr>
+    <tbody>
+        @foreach (var clb in Model)
+        {
+            <tr>
+                <td style="text-align:center" bgcolor="white">@clb.CLUBID</td>
+                <td style="text-align:center" bgcolor="white">@clb.CLUBNAME</td>
+                <td style="text-align:center" bgcolor="white">
+                    <a href="/Club/Delete/@clb.CLUBID" class="btn btn-danger">Delete</a>
+                    <a href="/Club/Update/@clb.CLUBID" class="btn btn-warning">Update</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Club/AddNewClub" class="btn btn-primary">Add New Club</a>
+

@@ -1,0 +1,33 @@
+﻿@model StudentManagementSystem.Models.EntityFramework.STUDENTS
+@{
+    ViewBag.Title = "AddNewStudent";
+}
+
+<form method="post" class="form-group">
+    <div>
+        <label class="text-warning">STUDENT NAME</label>
+        <input type="text" class="form-control" name="STDNAME" />
+    </div>
+
+    <div style="margin-top:10px">
+        <label class="text-warning">STUDENT SURNAME</label>
+        <input type="text" class="form-control" name="STDSURNAME" />
+    </div>
+
+    <div style="margin-top:10px">
+        <label class="text-warning">STUDENT GENDER</label>
+        <input type="text" class="form-control" name="STDGENDER" />
+    </div>
+
+    <div style="margin-top:10px">
+        <label class="text-warning">STUDENT CLUB</label>
+         @Html.DropDownListFor(m => m.CLUBS.CLUBID,(List<SelectListItem>)ViewBag.clb,new {@class="form-control"})   
+    </div>
+
+    <div style="margin-top:10px">
+        <button class="btn btn-success">Add a Student</button>
+    </div>
+</form>
+
+
+

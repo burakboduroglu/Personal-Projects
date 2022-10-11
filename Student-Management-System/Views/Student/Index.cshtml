@@ -1,0 +1,37 @@
+﻿
+@using StudentManagementSystem.Models.EntityFramework
+@model List<STUDENTS>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT ID</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT NAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT SURNAME</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT GENDER</th>
+        <th style="text-align:center" bgcolor="LightBlue">STUDENT CLUB</th>
+        <th style="text-align:center" bgcolor="LightBlue">OPERATIONS</th>
+    </tr>
+    <tbody>
+        @foreach (var std in Model)
+        {
+        <tr>
+            <td style="text-align:center" bgcolor="white">@std.STDID</td>
+            <td style="text-align:center" bgcolor="white">@std.STDNAME</td>
+            <td style="text-align:center" bgcolor="white">@std.STDSURNAME</td>
+            <td style="text-align:center" bgcolor="white">@std.STDGENDER</td>
+            <td style="text-align:center" bgcolor="white">@std.CLUBS.CLUBNAME</td>
+            <td style="text-align:center" bgcolor="white">
+                <a href="/Student/Delete/@std.STDID" class="btn btn-danger">Delete</a>
+                <a href="/Student/Update/@std.STDID" class="btn btn-warning">Update</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Student/AddNewStudent" class="btn btn-primary">Add a New Student</a>
+

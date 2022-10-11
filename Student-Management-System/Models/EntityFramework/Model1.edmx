@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbSchoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLUBS">
+          <Key>
+            <PropertyRef Name="CLUBID" />
+          </Key>
+          <Property Name="CLUBID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLUBNAME" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="LECTURES">
+          <Key>
+            <PropertyRef Name="LECTUREID" />
+          </Key>
+          <Property Name="LECTUREID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LECTURENAME" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="MARKS">
+          <Key>
+            <PropertyRef Name="MARKID" />
+          </Key>
+          <Property Name="MARKID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STDID" Type="int" />
+          <Property Name="LECTUREID" Type="tinyint" />
+          <Property Name="EXAM1" Type="tinyint" />
+          <Property Name="EXAM2" Type="tinyint" />
+          <Property Name="EXAM3" Type="tinyint" />
+          <Property Name="PROJECT" Type="tinyint" />
+          <Property Name="AVERAGE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SITUATION" Type="bit" />
+        </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="STDID" />
+          </Key>
+          <Property Name="STDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STDNAME" Type="varchar" MaxLength="20" />
+          <Property Name="STDSURNAME" Type="varchar" MaxLength="20" />
+          <Property Name="STDGENDER" Type="varchar" MaxLength="5" />
+          <Property Name="STDCLUB" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK_MARKS_LECTURES">
+          <End Role="LECTURES" Type="Self.LECTURES" Multiplicity="0..1" />
+          <End Role="MARKS" Type="Self.MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LECTURES">
+              <PropertyRef Name="LECTUREID" />
+            </Principal>
+            <Dependent Role="MARKS">
+              <PropertyRef Name="LECTUREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARKS_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="0..1" />
+          <End Role="MARKS" Type="Self.MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STDID" />
+            </Principal>
+            <Dependent Role="MARKS">
+              <PropertyRef Name="STDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STUDENTS_CLUBS">
+          <End Role="CLUBS" Type="Self.CLUBS" Multiplicity="0..1" />
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLUBS">
+              <PropertyRef Name="CLUBID" />
+            </Principal>
+            <Dependent Role="STUDENTS">
+              <PropertyRef Name="STDCLUB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbSchoolModelStoreContainer">
+          <EntitySet Name="CLUBS" EntityType="Self.CLUBS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LECTURES" EntityType="Self.LECTURES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARKS" EntityType="Self.MARKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MARKS_LECTURES" Association="Self.FK_MARKS_LECTURES">
+            <End Role="LECTURES" EntitySet="LECTURES" />
+            <End Role="MARKS" EntitySet="MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARKS_STUDENTS" Association="Self.FK_MARKS_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="MARKS" EntitySet="MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STUDENTS_CLUBS" Association="Self.FK_STUDENTS_CLUBS">
+            <End Role="CLUBS" EntitySet="CLUBS" />
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbSchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLUBS">
+          <Key>
+            <PropertyRef Name="CLUBID" />
+          </Key>
+          <Property Name="CLUBID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLUBNAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STUDENTS" Relationship="Self.FK_STUDENTS_CLUBS" FromRole="CLUBS" ToRole="STUDENTS" />
+        </EntityType>
+        <EntityType Name="LECTURES">
+          <Key>
+            <PropertyRef Name="LECTUREID" />
+          </Key>
+          <Property Name="LECTUREID" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LECTURENAME" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MARKS" Relationship="Self.FK_MARKS_LECTURES" FromRole="LECTURES" ToRole="MARKS" />
+        </EntityType>
+        <EntityType Name="MARKS">
+          <Key>
+            <PropertyRef Name="MARKID" />
+          </Key>
+          <Property Name="MARKID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STDID" Type="Int32" />
+          <Property Name="LECTUREID" Type="Byte" />
+          <Property Name="EXAM1" Type="Byte" />
+          <Property Name="EXAM2" Type="Byte" />
+          <Property Name="EXAM3" Type="Byte" />
+          <Property Name="PROJECT" Type="Byte" />
+          <Property Name="AVERAGE" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SITUATION" Type="Boolean" />
+          <NavigationProperty Name="LECTURES" Relationship="Self.FK_MARKS_LECTURES" FromRole="MARKS" ToRole="LECTURES" />
+          <NavigationProperty Name="STUDENTS" Relationship="Self.FK_MARKS_STUDENTS" FromRole="MARKS" ToRole="STUDENTS" />
+        </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="STDID" />
+          </Key>
+          <Property Name="STDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STDNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STDSURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STDGENDER" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="STDCLUB" Type="Byte" />
+          <NavigationProperty Name="CLUBS" Relationship="Self.FK_STUDENTS_CLUBS" FromRole="STUDENTS" ToRole="CLUBS" />
+          <NavigationProperty Name="MARKS" Relationship="Self.FK_MARKS_STUDENTS" FromRole="STUDENTS" ToRole="MARKS" />
+        </EntityType>
+        <Association Name="FK_STUDENTS_CLUBS">
+          <End Role="CLUBS" Type="Self.CLUBS" Multiplicity="0..1" />
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLUBS">
+              <PropertyRef Name="CLUBID" />
+            </Principal>
+            <Dependent Role="STUDENTS">
+              <PropertyRef Name="STDCLUB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARKS_LECTURES">
+          <End Role="LECTURES" Type="Self.LECTURES" Multiplicity="0..1" />
+          <End Role="MARKS" Type="Self.MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LECTURES">
+              <PropertyRef Name="LECTUREID" />
+            </Principal>
+            <Dependent Role="MARKS">
+              <PropertyRef Name="LECTUREID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MARKS_STUDENTS">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="0..1" />
+          <End Role="MARKS" Type="Self.MARKS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="STDID" />
+            </Principal>
+            <Dependent Role="MARKS">
+              <PropertyRef Name="STDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbSchoolEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLUBS" EntityType="Self.CLUBS" />
+          <EntitySet Name="LECTURES" EntityType="Self.LECTURES" />
+          <EntitySet Name="MARKS" EntityType="Self.MARKS" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" />
+          <AssociationSet Name="FK_STUDENTS_CLUBS" Association="Self.FK_STUDENTS_CLUBS">
+            <End Role="CLUBS" EntitySet="CLUBS" />
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARKS_LECTURES" Association="Self.FK_MARKS_LECTURES">
+            <End Role="LECTURES" EntitySet="LECTURES" />
+            <End Role="MARKS" EntitySet="MARKS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MARKS_STUDENTS" Association="Self.FK_MARKS_STUDENTS">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="MARKS" EntitySet="MARKS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbSchoolModelStoreContainer" CdmEntityContainer="DbSchoolEntities">
+          <EntitySetMapping Name="CLUBS">
+            <EntityTypeMapping TypeName="DbSchoolModel.CLUBS">
+              <MappingFragment StoreEntitySet="CLUBS">
+                <ScalarProperty Name="CLUBID" ColumnName="CLUBID" />
+                <ScalarProperty Name="CLUBNAME" ColumnName="CLUBNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LECTURES">
+            <EntityTypeMapping TypeName="DbSchoolModel.LECTURES">
+              <MappingFragment StoreEntitySet="LECTURES">
+                <ScalarProperty Name="LECTUREID" ColumnName="LECTUREID" />
+                <ScalarProperty Name="LECTURENAME" ColumnName="LECTURENAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARKS">
+            <EntityTypeMapping TypeName="DbSchoolModel.MARKS">
+              <MappingFragment StoreEntitySet="MARKS">
+                <ScalarProperty Name="MARKID" ColumnName="MARKID" />
+                <ScalarProperty Name="STDID" ColumnName="STDID" />
+                <ScalarProperty Name="LECTUREID" ColumnName="LECTUREID" />
+                <ScalarProperty Name="EXAM1" ColumnName="EXAM1" />
+                <ScalarProperty Name="EXAM2" ColumnName="EXAM2" />
+                <ScalarProperty Name="EXAM3" ColumnName="EXAM3" />
+                <ScalarProperty Name="PROJECT" ColumnName="PROJECT" />
+                <ScalarProperty Name="AVERAGE" ColumnName="AVERAGE" />
+                <ScalarProperty Name="SITUATION" ColumnName="SITUATION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STUDENTS">
+            <EntityTypeMapping TypeName="DbSchoolModel.STUDENTS">
+              <MappingFragment StoreEntitySet="STUDENTS">
+                <ScalarProperty Name="STDID" ColumnName="STDID" />
+                <ScalarProperty Name="STDNAME" ColumnName="STDNAME" />
+                <ScalarProperty Name="STDSURNAME" ColumnName="STDSURNAME" />
+                <ScalarProperty Name="STDGENDER" ColumnName="STDGENDER" />
+                <ScalarProperty Name="STDCLUB" ColumnName="STDCLUB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
