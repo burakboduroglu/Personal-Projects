@@ -1,0 +1,12 @@
+C:\Users\burak\Desktop\DictionaryGame\bin\Debug\DictionaryGame.exe.config
+C:\Users\burak\Desktop\DictionaryGame\bin\Debug\DictionaryGame.exe
+C:\Users\burak\Desktop\DictionaryGame\bin\Debug\DictionaryGame.pdb
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.csproj.AssemblyReference.cache
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.csproj.SuggestedBindingRedirects.cache
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.Form1.resources
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.Properties.Resources.resources
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.csproj.GenerateResource.cache
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.csproj.CoreCompileInputs.cache
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.exe
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.pdb
+C:\Users\burak\Desktop\DictionaryGame\obj\Debug\DictionaryGame.Form2.resources
